@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+option csharp_namespace = "PCgRPCService";
+
+import "google/protobuf/timestamp.proto";
+
+package postcomment;
+
+// The greeting service definition.
+service Greeter {
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply);
+}
+
+service PostCommentService{
+    rpc AddPost (Post) returns (Empty);
+    rpc UpdatePost (Post) returns (Post);
+    rpc DeletePost (Post) returns (Empty);
+    rpc GetPostById (Id) returns (Post);
+    rpc GetPosts (Empty) returns (Posts);
+    rpc AddComment (Comment) returns (Empty);
+    rpc UpdateComment (Comment) returns (Comment);
+    rpc GetCommentById (Id) returns (Comment);
+}
+
+
+message Post{
+    int32 PostId = 1;
+    string Description = 2;
+    string Domain =3;
+    google.protobuf.Timestamp Date = 4;
+}
+
+message Posts{
+	repeated Post items = 1;
+}
+
+message Comment{
+	int32 PostId = 1;
+}
+
+message Id{
+    int32 id = 1;
+}
+
+message Empty{
+
+}
+// The request message containing the user's name.
+message HelloRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings.
+message HelloReply {
+  string message = 1;
+}
